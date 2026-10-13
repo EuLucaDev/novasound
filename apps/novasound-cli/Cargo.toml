@@ -1,0 +1,21 @@
+[package]
+name = "novasound-cli"
+description = "NovaSound command line: headless editing, conversion, bounce, MCP server, app control"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish = false
+
+[[bin]]
+name = "novasound-cli"
+path = "src/main.rs"
+
+[lints]
+workspace = true
+
+[dependencies]
+novasound-engine.workspace = true
+novasound-automation.workspace = true
+novasound-audio-io.workspace = true
+novasound-dsp.workspace = true
+serde_json.workspace = true

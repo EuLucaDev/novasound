@@ -1,0 +1,19 @@
+Nova Sound
+Copyright (c) 2026 Nova Foods.
+Licensed under the MIT License or the Apache License, Version 2.0, at your option
+(LICENSE-MIT, LICENSE-APACHE).
+
+Nova Sound is a modified version of SoundCraft (https://github.com/storytold/soundcraft),
+Copyright (c) 2026 ArtCraft Team and the SoundCraft contributors, used under the same
+licenses. It is not affiliated with, sponsored by or endorsed by the ArtCraft Team.
+The Nova Foods name, logo and icons in docs/brand/ and assets/app-icon/ are trademarks
+of Nova Foods and are not covered by the licenses above.
+
+Third-party material
+
+This product bundles third-party material under its own licenses, listed below. The per-file
+list (author, source, license) is in ATTRIBUTION.md.
+
+None: every bundled asset is original to Nova Sound. Icons are drawn in code; demo audio is
+synthesised in code. The egui default fonts (Ubuntu-Light, Hack, Noto Emoji, Emoji Icon Font) ship
+inside the egui crate under their own open licenses (see ATTRIBUTION.md).

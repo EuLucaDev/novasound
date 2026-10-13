@@ -1,0 +1,73 @@
+[workspace]
+exclude = ["vendor"]
+resolver = "3"
+members = ["crates/*", "apps/*", "xtask"]
+default-members = ["crates/*", "apps/*", "xtask"]
+
+[workspace.package]
+version = "0.6.1"
+edition = "2024"
+license = "MIT OR Apache-2.0"
+rust-version = "1.90"
+repository = "https://github.com/EuLucaDev/novasound"
+
+[workspace.dependencies]
+# internal
+novasound-time = { path = "crates/time" }
+novasound-audio-io = { path = "crates/audio-io" }
+novasound-midi = { path = "crates/midi" }
+novasound-video = { path = "crates/video" }
+novasound-dsp = { path = "crates/dsp" }
+novasound-clap-host = { path = "crates/clap-host" }
+novasound-vst3-host = { path = "crates/vst3-host" }
+novasound-au-host = { path = "crates/au-host" }
+novasound-model = { path = "crates/model" }
+novasound-mix = { path = "crates/mix" }
+novasound-engine = { path = "crates/engine" }
+novasound-playback = { path = "crates/playback" }
+novasound-automation = { path = "crates/automation" }
+novasound-ui-egui = { path = "crates/ui-egui" }
+
+# foundation
+thiserror = "2"
+serde = { version = "1", features = ["derive", "rc"] }
+serde_json = { version = "1", features = ["float_roundtrip"] }
+log = "0.4"
+rayon = "1"
+proptest = "1"
+
+# audio
+symphonia = { version = "0.5", default-features = false, features = ["mp3", "flac", "vorbis", "ogg", "wav", "pcm", "aiff", "isomp4", "aac", "alac", "adpcm", "caf", "mkv"] }
+rustfft = "6"
+# Session bundles (one file holding a session and its audio, for the browser): stored entries only.
+zip = { version = "9", default-features = false }
+cpal = "0.16"
+
+# ui
+nova-ui = { path = "vendor/novafoods-libs-5c874d51ee/crates/ui", features = ["serde"] }
+egui = "0.36"
+eframe = { version = "0.36", default-features = false }
+egui_kittest = "0.36"
+rfd = "0.17"
+image = { version = "0.25", default-features = false, features = ["png"] }
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
+[workspace.lints.clippy]
+dbg_macro = "warn"
+todo = "warn"
+too_many_arguments = "allow"
+type_complexity = "allow"
+
+[profile.dev.package."*"]
+opt-level = 2
+
+[profile.dev]
+opt-level = 1
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 16
+debug = 0

@@ -1,0 +1,25 @@
+[package]
+name = "novasound-mix"
+description = "NovaSound mix engine: renders a session's tracks, plugins, sends, busses and automation to audio"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+repository.workspace = true
+
+[dependencies]
+novasound-time.workspace = true
+novasound-audio-io.workspace = true
+novasound-midi.workspace = true
+novasound-dsp.workspace = true
+novasound-clap-host.workspace = true
+novasound-vst3-host.workspace = true
+novasound-au-host.workspace = true
+novasound-model.workspace = true
+log.workspace = true
+
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+rayon.workspace = true
+
+[lints]
+workspace = true
