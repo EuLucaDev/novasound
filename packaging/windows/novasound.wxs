@@ -11,13 +11,13 @@
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
   <Package
       Name="NovaSound"
-      Manufacturer="Learning Machines LLC"
+      Manufacturer="Nova Foods"
       Version="$(var.Version)"
-      UpgradeCode="EE53D3E5-D0AE-40F9-808D-9417FDEBF61A"
+      UpgradeCode="622375B0-72E1-5070-AC77-D08458AC9841"
       Scope="perMachine"
       Compressed="yes"
       Language="1033">
-    <SummaryInformation Description="NovaSound digital audio workstation" Manufacturer="Learning Machines LLC" />
+    <SummaryInformation Description="NovaSound digital audio workstation" Manufacturer="Nova Foods" />
     <!-- Same-version upgrades let successive pre-releases of one X.Y.Z replace each other
          (MSI versions are numeric, so 1.2.3-rc.1 and 1.2.3-rc.2 are both 1.2.3). -->
     <MajorUpgrade AllowSameVersionUpgrades="yes"
@@ -42,7 +42,7 @@
 
   <Fragment>
     <ComponentGroup Id="NovasoundFiles" Directory="INSTALLFOLDER">
-      <Component Id="NovasoundApp" Guid="091136D7-205E-41A8-9D27-5E231F7CBBD4">
+      <Component Id="NovasoundApp" Guid="7DEE8898-F66B-5605-9AF4-3FE98BEDD60D">
         <File Id="NovasoundExe" Source="$(var.BinDir)\novasound.exe" KeyPath="yes">
           <Shortcut Id="StartMenuShortcut" Directory="ProgramMenuFolder" Name="NovaSound"
               Description="NovaSound digital audio workstation" WorkingDirectory="INSTALLFOLDER" Advertise="yes"
@@ -83,8 +83,11 @@
         <RegistryValue Root="HKLM" Key="Software\Microsoft\Windows\CurrentVersion\App Paths\novasound.exe" Value="[#NovasoundExe]" Type="string" />
       </Component>
 
-      <Component Id="NovasoundCli" Guid="4552049A-C2F0-4AB0-BAE6-A62C3348F4B4">
+      <Component Id="NovasoundCli" Guid="B5F801D8-6DD1-57D1-9B83-17AD48ACF2CB">
         <File Id="NovasoundCliExe" Source="$(var.BinDir)\novasound-cli.exe" KeyPath="yes" />
+      </Component>
+      <Component Id="NovaFoodsLegalNotice">
+        <File Id="NovaFoodsLegalNoticeFile" Source="$(sys.SOURCEFILEDIR)..\..\NOTICE" KeyPath="yes" />
       </Component>
     </ComponentGroup>
   </Fragment>

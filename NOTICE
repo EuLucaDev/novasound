@@ -14,6 +14,6 @@ Third-party material
 This product bundles third-party material under its own licenses, listed below. The per-file
 list (author, source, license) is in ATTRIBUTION.md.
 
-None: every bundled asset is original to Nova Sound. Icons are drawn in code; demo audio is
+None: every bundled asset is original to SoundCraft. Icons are drawn in code; demo audio is
 synthesised in code. The egui default fonts (Ubuntu-Light, Hack, Noto Emoji, Emoji Icon Font) ship
 inside the egui crate under their own open licenses (see ATTRIBUTION.md).
