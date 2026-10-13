@@ -2,8 +2,8 @@
 
 use super::*;
 use crate::cmd;
-use serde_json::json;
 use novasound_model::{ChannelFormat, Mixer, OutputPath, Route, SEND_SLOTS, Session, SurroundPan, TrackKind};
+use serde_json::json;
 
 pub fn specs() -> Vec<CommandSpec> {
     vec![

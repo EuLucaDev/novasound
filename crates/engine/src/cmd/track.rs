@@ -2,8 +2,8 @@
 
 use super::*;
 use crate::cmd;
-use serde_json::json;
 use novasound_model::{ChannelFormat, Group, GroupId, Playlist, Route, Session, Track, TrackHeight, TrackKind};
+use serde_json::json;
 
 pub fn specs() -> Vec<CommandSpec> {
     vec![
@@ -393,13 +393,7 @@ fn split_mono(e: &mut Engine, p: &Value) -> Result<Value> {
     Ok(json!({"tracks": out}))
 }
 
-fn flag(
-    e: &mut Engine,
-    p: &Value,
-    cmd: &str,
-    set: fn(&mut novasound_model::Track, bool),
-    get: fn(&novasound_model::Track) -> bool,
-) -> Result<Value> {
+fn flag(e: &mut Engine, p: &Value, cmd: &str, set: fn(&mut novasound_model::Track, bool), get: fn(&novasound_model::Track) -> bool) -> Result<Value> {
     let tracks = tracks_required(e, cmd, p)?;
     let explicit = p.get("inactive").or_else(|| p.get("hidden")).or_else(|| p.get("value")).or_else(|| p.get("ticks")).and_then(Value::as_bool);
     let s = e.session_mut();

@@ -1,8 +1,8 @@
 use egui::{Event, Key, Modifiers, vec2};
 use egui_kittest::Harness;
-use serde_json::json;
 use novasound_ui_egui::dialogs::Dialog;
 use novasound_ui_egui::{Services, SoundApp};
+use serde_json::json;
 
 /// The Keys track's MIDI clip in the editor with its first two notes selected, the Rename Track dialog open or not.
 fn harness(rename: bool) -> Harness<'static, SoundApp> {

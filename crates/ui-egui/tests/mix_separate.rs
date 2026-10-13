@@ -2,8 +2,8 @@
 //! brings Mix back into it.
 use egui::vec2;
 use egui_kittest::Harness;
-use serde_json::json;
 use novasound_ui_egui::{MainWindow, Services, SoundApp, mix_window};
+use serde_json::json;
 
 #[test]
 fn mix_in_a_separate_window_toggles_and_closing_it_returns_to_the_main_window() {

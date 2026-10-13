@@ -3,9 +3,9 @@
 use crate::SoundApp;
 use crate::theme::{Tokens, bold, regular};
 use egui::{Align2, Color32, Rect, Sense, Stroke, StrokeKind, Ui, pos2, vec2};
-use serde_json::json;
 use novasound_model::{ClipContent, ClipId, Tool};
 use novasound_time::TICKS_PER_QUARTER;
+use serde_json::json;
 
 const KEY_W: f32 = 48.0;
 const ROW_H: f32 = 9.0;

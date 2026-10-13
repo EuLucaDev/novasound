@@ -3,10 +3,10 @@
 // Integration tests: unwrapping and panicking on failure is fine here, unlike in shipped code (AGENTS.md).
 #![allow(clippy::unwrap_used, clippy::expect_used, clippy::panic)]
 
-use serde_json::{Value, json};
 use novasound_automation::{Headless, mcp::Server};
 use novasound_engine::Engine;
 use novasound_engine::file_access::AutomationRoots;
+use serde_json::{Value, json};
 use std::path::{Path, PathBuf};
 
 /// A marker that must never come back from a file outside the read root.

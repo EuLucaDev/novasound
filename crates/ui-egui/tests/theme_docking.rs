@@ -1,8 +1,8 @@
 //! Synthetic appearance checks for populated shared panels and custom controls.
 use egui::{Color32, vec2};
 use egui_kittest::Harness;
-use serde_json::json;
 use novasound_ui_egui::{Services, SoundApp, theme, widgets};
+use serde_json::json;
 
 #[test]
 fn shared_panels_and_controls_follow_manual_and_live_system_appearance() {

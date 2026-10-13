@@ -5,8 +5,8 @@
 
 use super::*;
 use crate::cmd;
-use serde_json::json;
 use novasound_model::{ClipContent, TrackKind};
+use serde_json::json;
 
 /// `edit.flags` key set while the Video track is offline (online is the default).
 pub const OFFLINE_FLAG: &str = "video.offline";
@@ -75,8 +75,8 @@ fn offset(e: &mut Engine, p: &Value) -> Result<Value> {
 #[cfg(test)]
 mod tests {
     use crate::Engine;
-    use serde_json::json;
     use novasound_model::{ChannelFormat, Clip, ClipContent, SourceId, TrackKind, VideoSource};
+    use serde_json::json;
 
     fn video_engine() -> (Engine, novasound_model::TrackId) {
         let mut e = Engine::default();

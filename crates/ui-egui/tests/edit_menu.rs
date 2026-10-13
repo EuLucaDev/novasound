@@ -1,5 +1,5 @@
-use serde_json::json;
 use novasound_ui_egui::{Services, SoundApp, menus};
+use serde_json::json;
 
 #[test]
 fn undo_and_redo_name_the_step_they_would_take() {

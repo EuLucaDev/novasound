@@ -5,9 +5,9 @@ use crate::SoundApp;
 use crate::theme::{mono, regular};
 use crate::video_track::{MovieKey, movie_secs, online, picture_at};
 use egui::{Align2, Color32, Rect, Sense, pos2, vec2};
-use serde_json::json;
 use novasound_model::{ClipContent, TrackKind};
 use novasound_time::TimeFormat;
+use serde_json::json;
 
 pub fn show(app: &mut SoundApp, ctx: &egui::Context) {
     if app.ui.show_video {

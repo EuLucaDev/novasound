@@ -3,10 +3,10 @@
 use crate::SoundApp;
 use crate::theme::{Tokens, mono, rgb};
 use egui::{Color32, Sense, vec2};
-use serde_json::json;
 use novasound_model::{AutomationMode, ClipContent};
 use novasound_playback::AudioConfig;
 use novasound_playback::devices::{AudioSystem, DeviceInfo};
+use serde_json::json;
 use std::sync::Arc;
 
 pub fn show(app: &mut SoundApp, ctx: &egui::Context) {

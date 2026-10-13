@@ -2,10 +2,10 @@
 
 use super::*;
 use crate::cmd;
-use serde_json::json;
 use novasound_midi::{Note, Sequence};
 use novasound_model::{Clip, ClipContent, ClipId};
 use novasound_time::TICKS_PER_QUARTER;
+use serde_json::json;
 
 pub fn specs() -> Vec<CommandSpec> {
     vec![

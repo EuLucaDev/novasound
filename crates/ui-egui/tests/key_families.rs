@@ -3,8 +3,8 @@
 
 use egui::os::OperatingSystem;
 use egui::{Key, Modifiers};
-use serde_json::json;
 use novasound_ui_egui::{Services, SoundApp, shortcuts};
+use serde_json::json;
 
 const MAC_CMD: Modifiers = Modifiers { mac_cmd: true, command: true, ..Modifiers::NONE };
 const PC_CTRL: Modifiers = Modifiers { ctrl: true, command: true, ..Modifiers::NONE };

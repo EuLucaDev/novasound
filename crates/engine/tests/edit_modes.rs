@@ -1,7 +1,7 @@
-use serde_json::{Value, json};
 use novasound_engine::Engine;
 use novasound_engine::edit::SHUFFLE_LOCK;
 use novasound_model::{AutoParam, Clip, ClipId, EditMode, Source, SourceId, TrackId};
+use serde_json::{Value, json};
 
 fn source(id: u64, frames: u64) -> Source {
     Source {

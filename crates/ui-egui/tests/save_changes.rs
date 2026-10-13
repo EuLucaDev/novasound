@@ -1,8 +1,8 @@
 use egui_kittest::Harness;
 use egui_kittest::kittest::Queryable;
-use serde_json::json;
 use novasound_ui_egui::dialogs::Dialog;
 use novasound_ui_egui::{Services, SoundApp, menus};
+use serde_json::json;
 
 fn harness() -> Harness<'static, SoundApp> {
     let app = SoundApp::new(novasound_engine::demo::demo_engine(), None, Services::default());

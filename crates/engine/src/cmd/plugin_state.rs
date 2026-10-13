@@ -3,8 +3,8 @@
 //! it into new instances.
 
 use super::*;
-use serde_json::json;
 use novasound_model::{INSERT_SLOTS, b64};
+use serde_json::json;
 
 pub fn specs() -> Vec<CommandSpec> {
     vec![CommandSpec {
@@ -65,8 +65,8 @@ fn insert_state(e: &mut Engine, p: &Value) -> Result<Value> {
 #[cfg(test)]
 mod tests {
     use crate::Engine;
-    use serde_json::json;
     use novasound_model::b64;
+    use serde_json::json;
 
     #[test]
     fn stores_and_clears_state_without_undo() {

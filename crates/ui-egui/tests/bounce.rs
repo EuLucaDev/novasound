@@ -1,9 +1,9 @@
 //! Bounce Mix renders across frames behind a progress window instead of freezing the app.
 use egui::vec2;
 use egui_kittest::{Harness, kittest::Queryable};
-use serde_json::json;
 use novasound_ui_egui::dialogs::Dialog;
 use novasound_ui_egui::{Services, SoundApp};
+use serde_json::json;
 use std::path::{Path, PathBuf};
 
 fn harness() -> Harness<'static, SoundApp> {

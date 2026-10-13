@@ -1,9 +1,9 @@
 //! The toolbar's tempo can be dragged or typed (#189).
 
 use egui::{Event, Key, Modifiers, PointerButton, Pos2, RawInput, Rect, Shape, epaint::ClippedShape, vec2};
-use serde_json::json;
 use novasound_time::BarBeat;
 use novasound_ui_egui::{Services, SoundApp};
+use serde_json::json;
 
 struct Rig {
     ctx: egui::Context,

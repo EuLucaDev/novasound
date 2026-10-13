@@ -1,7 +1,7 @@
 use egui::{Shape, vec2};
-use serde_json::json;
 use novasound_ui_egui::mix_window::strip_width;
 use novasound_ui_egui::{Services, SoundApp};
+use serde_json::json;
 
 const FULL: [&str; 7] = ["INSERTS A-E", "INSERTS F-J", "SENDS A-E", "SENDS F-J", "INSTRUMENT", "comments", "no group"];
 const SHORT: [&str; 6] = ["I A-E", "I F-J", "S A-E", "S F-J", "INST", "nogrp"];

@@ -16,7 +16,7 @@ fn main() {
     res.set_icon("../../assets/app-icon/novasound.ico")
         .set("ProductName", "Nova Sound")
         .set("FileDescription", "Nova Sound digital audio workstation")
-        .set("CompanyName", "Learning Machines LLC")
+        .set("CompanyName", "Nova Foods")
         .set("LegalCopyright", "Copyright (c) the Nova Sound authors. MIT OR Apache-2.0.")
         .set("OriginalFilename", "novasound.exe")
         .set("InternalName", "novasound");

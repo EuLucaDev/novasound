@@ -2,8 +2,8 @@
 
 use super::*;
 use crate::cmd;
-use serde_json::json;
 use novasound_model::{AutoParam, AutomationMode, INSERT_SLOTS, Insert, SEND_SLOTS, SendSlot, Session, TrackId};
+use serde_json::json;
 
 pub fn specs() -> Vec<CommandSpec> {
     vec![

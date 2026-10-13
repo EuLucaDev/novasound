@@ -1,6 +1,6 @@
 //! `ui.audio_device`: the audio device choice is kept only once the devices reopen with it.
-use serde_json::json;
 use novasound_ui_egui::{Services, SoundApp};
+use serde_json::json;
 
 #[test]
 fn the_audio_device_choice_is_kept_only_when_it_is_applied() {

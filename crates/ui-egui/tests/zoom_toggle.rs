@@ -1,8 +1,8 @@
 use egui::os::OperatingSystem;
 use egui::{Key, vec2};
 use egui_kittest::{Harness, kittest::Queryable};
-use serde_json::json;
 use novasound_ui_egui::{Services, SoundApp};
+use serde_json::json;
 
 #[test]
 fn e_fits_the_selection_to_the_edit_window_and_the_button_goes_back() {

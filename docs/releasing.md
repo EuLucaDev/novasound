@@ -190,7 +190,7 @@ are written with `umask 077` and deleted in `always()`/`finally` steps.
 
 | Secret | Used for |
 |---|---|
-| `APPLE_CERTIFICATE` | base64 `.p12` with "Developer ID Application: Learning Machines LLC (DJ6XS33FX8)" |
+| `APPLE_CERTIFICATE` | base64 `.p12` with "Developer ID Application: Nova Foods (DJ6XS33FX8)" |
 | `APPLE_CERTIFICATE_PASSWORD` | password for that `.p12` |
 | `KEYCHAIN_PASSWORD` | password for the temporary CI keychain (random if unset) |
 | `APPLE_ID` | Apple ID used by `notarytool` |

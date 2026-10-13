@@ -1,7 +1,7 @@
-use serde_json::json;
 use novasound_engine::{Engine, TransportRequest, TransportStatus};
 use novasound_model::Session;
 use novasound_time::Range;
+use serde_json::json;
 
 #[test]
 fn replacing_session_resets_status_and_discards_old_transport_requests() {

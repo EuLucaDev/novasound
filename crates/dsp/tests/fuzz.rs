@@ -1,5 +1,5 @@
-use proptest::prelude::*;
 use novasound_dsp::{create, offline, plugins};
+use proptest::prelude::*;
 
 proptest! {
     #![proptest_config(ProptestConfig::with_cases(48))]

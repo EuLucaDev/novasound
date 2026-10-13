@@ -6,8 +6,8 @@
 use crate::SoundApp;
 use crate::theme::{Tokens, mono, regular};
 use egui::{Align2, Color32, CursorIcon, Rect, Sense, Stroke, StrokeKind, Ui, pos2, vec2};
-use serde_json::json;
 use novasound_model::{Insert, TrackId};
+use serde_json::json;
 use std::path::Path;
 
 /// The built-in Sampler's plugin id.

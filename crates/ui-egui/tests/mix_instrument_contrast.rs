@@ -1,7 +1,7 @@
 use egui::{Color32, Event, FullOutput, Rect, Shape, pos2, vec2};
 use egui_kittest::kittest::Queryable;
-use serde_json::json;
 use novasound_ui_egui::{Services, SoundApp, theme::ThemeMode};
+use serde_json::json;
 
 #[derive(Debug)]
 struct Slot {

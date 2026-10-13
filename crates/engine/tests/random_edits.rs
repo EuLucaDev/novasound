@@ -1,9 +1,9 @@
 //! Random command sequences against the demo session: nothing panics, invariants hold, and
 //! undoing everything restores the original document.
 
+use novasound_engine::Engine;
 use proptest::prelude::*;
 use serde_json::{Value, json};
-use novasound_engine::Engine;
 
 const CMDS: &[&str] = &[
     "edit.cut",

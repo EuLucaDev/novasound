@@ -6,10 +6,10 @@ use crate::theme::{Tokens, bold, clip_colors, regular, rgb};
 use crate::widgets::{groove, level_pos, meter_pos, raised_key, shade};
 use crate::{Gesture, SoundApp, toolbar};
 use egui::{Align2, Color32, CornerRadius, Pos2, Rect, Sense, Shape, Stroke, StrokeKind, Ui, pos2, vec2};
-use serde_json::json;
 use novasound_engine::edit as ops;
 use novasound_model::{AutoParam, Clip, ClipContent, ClipId, EditMode, Session, Tool, Track, TrackHeight, TrackId, TrackKind};
 use novasound_time::{GridValue, NoteValue, Range, Samples, TimeFormat, format_position};
+use serde_json::json;
 use std::collections::HashSet;
 use std::sync::Arc;
 

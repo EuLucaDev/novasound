@@ -2,9 +2,9 @@
 
 use super::*;
 use crate::{TransportRequest, cmd};
-use serde_json::json;
 use novasound_model::{Clip, ClipContent, Session, SourceAudio};
 use novasound_time::SampleRate;
+use serde_json::json;
 use std::sync::{Arc, Mutex, PoisonError, Weak};
 
 /// Transients are found in fixed blocks of each clip, so a long clip costs a block per press and
@@ -175,11 +175,11 @@ fn analysed(s: &Session, t: TrackId, around: Range) -> Vec<Samples> {
 #[cfg(test)]
 mod tests {
     use crate::Engine;
-    use serde_json::json;
     use novasound_audio_io::{AudioBuffer, FileFormat};
     use novasound_midi::{Note, Sequence};
     use novasound_model::{ChannelFormat, Clip, Session, TrackId, TrackKind};
     use novasound_time::{SampleRate, TICKS_PER_QUARTER};
+    use serde_json::json;
 
     const SR: f64 = 48_000.0;
 

@@ -2,8 +2,8 @@
 //! that map to a command are live; the rest are shown disabled (and listed in the parity report).
 
 use crate::{MainWindow, SoundApp};
-use serde_json::{Value, json};
 use novasound_engine::catalog;
+use serde_json::{Value, json};
 
 /// UI-layer commands: (id, label, catalog path or "", shortcut).
 pub const UI_COMMANDS: &[(&str, &str, &str, Option<&str>)] = &[

@@ -1,8 +1,8 @@
 //! The MIDI Editor's Quantize button snaps to the grid the editor shows.
 use egui::vec2;
 use egui_kittest::{Harness, kittest::Queryable};
-use serde_json::json;
 use novasound_ui_egui::{Services, SoundApp};
+use serde_json::json;
 
 fn quantize_on(grid: &str) -> i64 {
     let mut app = SoundApp::new(novasound_engine::Engine::default(), None, Services::default());

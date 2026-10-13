@@ -78,9 +78,7 @@ pub const INSTRUMENT_SLOT: usize = usize::MAX;
 
 /// Hosted third-party plugin ids (CLAP or VST3): created off the audio thread in realtime use.
 pub fn is_third_party(id: &str) -> bool {
-    id.starts_with(novasound_clap_host::ID_PREFIX)
-        || id.starts_with(novasound_vst3_host::ID_PREFIX)
-        || id.starts_with(novasound_au_host::ID_PREFIX)
+    id.starts_with(novasound_clap_host::ID_PREFIX) || id.starts_with(novasound_vst3_host::ID_PREFIX) || id.starts_with(novasound_au_host::ID_PREFIX)
 }
 
 /// A third-party plugin instance a session needs: which slot, which plugin, how many channels,

@@ -1,8 +1,8 @@
 //! Real Edit/Mix panel workflows, persistence, and command ownership without OS windows.
 use egui::{Event, Modifiers, PointerButton, vec2};
 use egui_kittest::{Harness, kittest::Queryable};
-use serde_json::json;
 use novasound_ui_egui::{MainWindow, Services, SoundApp, UiState, docking::Panel};
+use serde_json::json;
 
 fn harness(state: Option<UiState>, width: f32, scale: f32) -> Harness<'static, SoundApp> {
     let mut app = SoundApp::new(novasound_engine::Engine::default(), None, Services::default());

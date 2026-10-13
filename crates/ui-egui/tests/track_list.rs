@@ -1,9 +1,9 @@
 //! Dragging rows in the Tracks list reorders the tracks (#170); a click still selects.
 
 use egui::{Event, PointerButton, Pos2, RawInput, Rect, Shape, epaint::ClippedShape, pos2, vec2};
-use serde_json::json;
 use novasound_model::TrackId;
 use novasound_ui_egui::{Services, SoundApp};
+use serde_json::json;
 
 struct Rig {
     ctx: egui::Context,

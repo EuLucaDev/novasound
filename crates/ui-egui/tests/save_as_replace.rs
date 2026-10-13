@@ -1,8 +1,8 @@
 //! Save As over another session asks first, and Enter alone never replaces it.
 use egui::vec2;
 use egui_kittest::{Harness, kittest::Queryable};
-use serde_json::json;
 use novasound_ui_egui::{Services, SoundApp, dialogs::Dialog};
+use serde_json::json;
 
 #[test]
 fn saving_over_another_session_takes_the_replace_button() {

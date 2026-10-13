@@ -1,10 +1,10 @@
 //! Empty MIDI clips from the Pencil, in whole bars, and from the empty MIDI Editor (#282).
 
 use egui::{Event, Id, PointerButton, Pos2, RawInput, Rect, pos2, vec2};
-use serde_json::json;
 use novasound_model::ClipContent;
 use novasound_time::BarBeat;
 use novasound_ui_egui::{Services, SoundApp, edit_window::x_of, midi_editor};
+use serde_json::json;
 
 struct Rig {
     ctx: egui::Context,

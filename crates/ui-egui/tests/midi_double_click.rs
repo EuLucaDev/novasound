@@ -1,9 +1,9 @@
 //! Double-clicking a MIDI clip with the Grabber opens it in the MIDI Editor, as in Pro Tools.
 
 use egui::{Event, Modifiers, PointerButton, Pos2, RawInput, Rect, pos2, vec2};
-use serde_json::json;
 use novasound_engine::model::ClipId;
 use novasound_ui_egui::{Services, SoundApp, edit_window, midi_editor};
+use serde_json::json;
 
 struct Rig {
     ctx: egui::Context,

@@ -362,8 +362,8 @@ fn quantize_to_grid(e: &mut Engine, p: &Value) -> Result<Value> {
 
 #[cfg(test)]
 mod tests {
-    use serde_json::json;
     use novasound_model::{ClipId, TrackId};
+    use serde_json::json;
 
     #[test]
     fn elastic_warp_renders_and_remove_warp_restores() {

@@ -1,8 +1,8 @@
 //! macOS system menu bar. All actions use the same menu dispatch as the egui host.
 use muda::{CheckMenuItem, Menu, MenuEvent, MenuItem, PredefinedMenuItem, Submenu};
+use novasound_ui_egui::{SoundApp, menus};
 use objc2::MainThreadMarker;
 use objc2_app_kit::NSApplication;
-use novasound_ui_egui::{SoundApp, menus};
 use std::sync::mpsc::{Receiver, channel};
 
 struct Entry {

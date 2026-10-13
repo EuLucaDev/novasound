@@ -2,8 +2,8 @@
 
 use super::*;
 use crate::cmd;
-use serde_json::json;
 use novasound_model::SourceId;
+use serde_json::json;
 use std::collections::BTreeSet;
 
 const CLEAR: &str = "clip.clear";

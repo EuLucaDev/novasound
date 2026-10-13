@@ -1,10 +1,10 @@
 //! Consolidate makes one clip per track that covers exactly the edit selection (#164).
 
-use serde_json::json;
 use novasound_audio_io::{AudioBuffer, FileFormat};
 use novasound_engine::{Engine, EngineError};
 use novasound_model::{Clip, TrackId};
 use novasound_time::Range;
+use serde_json::json;
 
 fn stereo_tracks(n: u64) -> Engine {
     let mut e = Engine::default();

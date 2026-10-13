@@ -33,12 +33,12 @@ pub mod waveform;
 pub mod widgets;
 pub mod windows;
 
-use serde_json::{Value, json};
 use novasound_engine::{Engine, TransportRequest};
 use novasound_model::TrackId;
 use novasound_playback::record::Trouble;
 use novasound_playback::{OutputTrouble, Player};
 use novasound_time::{Range, Samples};
+use serde_json::{Value, json};
 use std::collections::HashMap;
 use std::sync::mpsc::Receiver;
 

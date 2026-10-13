@@ -1,8 +1,8 @@
 //! An agent completes realistic DAW tasks through MCP only, and verifies each through MCP.
 
-use serde_json::{Value, json};
 use novasound_automation::{Headless, mcp::Server};
 use novasound_engine::Engine;
+use serde_json::{Value, json};
 
 fn rpc(s: &mut Server<Headless>, id: i64, method: &str, params: Value) -> Value {
     s.handle(&json!({"jsonrpc": "2.0", "id": id, "method": method, "params": params})).unwrap()

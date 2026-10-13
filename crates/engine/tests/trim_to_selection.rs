@@ -1,6 +1,6 @@
-use serde_json::json;
 use novasound_engine::Engine;
 use novasound_model::{ChannelFormat, Clip, Session, SourceId, TrackKind};
+use serde_json::json;
 
 #[test]
 fn trim_to_selection_keeps_clips_sorted() {

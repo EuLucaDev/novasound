@@ -1,7 +1,7 @@
 use egui::{Color32, Shape, vec2};
 use egui_kittest::Harness;
-use serde_json::json;
 use novasound_ui_egui::{Services, SoundApp, theme::ThemeMode};
+use serde_json::json;
 
 fn contrast(a: Color32, b: Color32) -> f64 {
     let luminance = |color: Color32| {

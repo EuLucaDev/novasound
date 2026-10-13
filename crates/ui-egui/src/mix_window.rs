@@ -7,9 +7,9 @@ use crate::widgets::{
     rec_toggle, selector_box, selector_box_with_tooltip, shade, surround_panner, text_toggle, vgradient,
 };
 use egui::{Align2, Color32, CornerRadius, Rect, Sense, Stroke, StrokeKind, Ui, pos2, vec2};
-use serde_json::json;
 use novasound_model::{ChannelFormat, Route, SurroundPan, Track, TrackId, TrackKind};
 use novasound_playback::MeterSnapshot;
+use serde_json::json;
 
 pub fn strip_width(narrow: bool) -> f32 {
     if narrow { 64.0 } else { 98.0 }

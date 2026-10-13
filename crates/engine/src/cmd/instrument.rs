@@ -4,8 +4,8 @@
 
 use super::*;
 use crate::cmd;
-use serde_json::json;
 use novasound_model::{Insert, TrackKind};
+use serde_json::json;
 
 pub fn specs() -> Vec<CommandSpec> {
     vec![
@@ -90,10 +90,10 @@ fn set_instrument_param(e: &mut Engine, p: &Value) -> Result<Value> {
 #[cfg(test)]
 mod tests {
     use crate::Engine;
-    use serde_json::json;
     use novasound_midi::{Note, Sequence};
     use novasound_model::{Clip, TrackId};
     use novasound_time::{Range, TICKS_PER_QUARTER};
+    use serde_json::json;
 
     fn track(e: &mut Engine, kind: &str) -> TrackId {
         e.execute("track.new", &json!({"kind": kind})).unwrap();

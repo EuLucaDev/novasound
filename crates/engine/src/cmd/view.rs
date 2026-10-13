@@ -2,8 +2,8 @@
 
 use super::*;
 use crate::cmd;
-use serde_json::json;
 use novasound_time::{GridValue, NoteValue, TimeFormat};
+use serde_json::json;
 
 pub fn specs() -> Vec<CommandSpec> {
     vec![

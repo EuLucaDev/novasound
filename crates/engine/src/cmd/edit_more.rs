@@ -5,9 +5,9 @@ use super::more_util::{clip_db, render_stretched, replace_clip, set_clip_env, ta
 use super::*;
 use crate::edit as ops;
 use crate::{Clipboard, TransportRequest, cmd};
-use serde_json::json;
 use novasound_model::{AutoParam, AutomationLane, Clip, ClipContent, ClipId, EditMode, Playlist, Session};
 use novasound_time::{Range, Samples};
+use serde_json::json;
 
 #[derive(Clone, Copy, PartialEq)]
 enum Lanes {

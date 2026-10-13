@@ -3,8 +3,8 @@
 
 use super::*;
 use crate::cmd;
-use serde_json::json;
 use novasound_dsp::PluginInfo;
+use serde_json::json;
 
 pub fn specs() -> Vec<CommandSpec> {
     vec![cmd!(

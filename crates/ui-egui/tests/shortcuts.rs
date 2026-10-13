@@ -1,7 +1,7 @@
 use egui::os::OperatingSystem;
 use egui::{Key, Modifiers};
-use serde_json::json;
 use novasound_ui_egui::{MainWindow, Services, SoundApp, shortcuts};
+use serde_json::json;
 
 fn press(ctx: &egui::Context, app: &mut SoundApp, key: Key, modifiers: Modifiers) {
     let events = [true, false].map(|pressed| egui::Event::Key { key, physical_key: None, pressed, repeat: false, modifiers }).to_vec();

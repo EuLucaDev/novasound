@@ -1,10 +1,10 @@
 use egui::{Color32, FullOutput, Shape, epaint::TextShape, vec2};
 use egui_kittest::Harness;
-use serde_json::json;
 use novasound_ui_egui::{
     Services, SoundApp,
     theme::{ThemeMode, Tokens},
 };
+use serde_json::json;
 
 const SCALE: [&str; 10] = ["12", "6", "0", "5", "10", "15", "20", "30", "40", "60"];
 

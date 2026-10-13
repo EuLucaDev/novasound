@@ -1,8 +1,8 @@
 //! Double-clicking a marker in the ruler renames it; elsewhere it still adds one (#186).
 
 use egui::{Event, Key, Modifiers, PointerButton, Pos2, RawInput, Rect, Shape, epaint::ClippedShape, pos2, vec2};
-use serde_json::json;
 use novasound_ui_egui::{Services, SoundApp};
+use serde_json::json;
 
 struct Rig {
     ctx: egui::Context,

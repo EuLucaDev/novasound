@@ -4,8 +4,8 @@ use super::more_util::toggle_flag;
 use super::*;
 use crate::edit as ops;
 use crate::{Clipboard, cmd};
-use serde_json::json;
 use novasound_model::{EditMode, Fade, FadeShape, Session};
+use serde_json::json;
 
 pub fn specs() -> Vec<CommandSpec> {
     vec![
@@ -452,8 +452,7 @@ fn select(e: &mut Engine, p: &Value) -> Result<Value> {
     let tracks = if p.get("tracks").is_some() || p.get("track").is_some() { Some(tracks_param(e, "edit.select", p)?) } else { None };
     let st = position_param(e, "edit.select", p, "start")?;
     let en = position_param(e, "edit.select", p, "end")?;
-    let clips =
-        p.get("clips").and_then(Value::as_array).map(|a| a.iter().filter_map(Value::as_u64).map(novasound_model::ClipId).collect::<Vec<_>>());
+    let clips = p.get("clips").and_then(Value::as_array).map(|a| a.iter().filter_map(Value::as_u64).map(novasound_model::ClipId).collect::<Vec<_>>());
     let sources =
         p.get("sources").and_then(Value::as_array).map(|a| a.iter().filter_map(Value::as_u64).map(novasound_model::SourceId).collect::<Vec<_>>());
     let list_changes = clips.is_some() || sources.is_some() || st.is_some();

@@ -1,7 +1,7 @@
 use egui::{Event, Key, Modifiers, vec2};
 use egui_kittest::Harness;
-use serde_json::json;
 use novasound_ui_egui::{Services, SoundApp, menus};
+use serde_json::json;
 
 #[test]
 fn typing_in_the_rename_clip_dialog_replaces_the_old_name() {

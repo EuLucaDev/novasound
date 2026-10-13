@@ -1,6 +1,6 @@
 use egui::{Event, Id, PointerButton, Pos2, RawInput, Rect, pos2, vec2};
-use serde_json::json;
 use novasound_ui_egui::{Services, SoundApp, midi_editor};
+use serde_json::json;
 
 fn frame(ctx: &egui::Context, app: &mut SoundApp, events: Vec<Event>) {
     let raw = RawInput { screen_rect: Some(Rect::from_min_size(Pos2::ZERO, vec2(1600.0, 1000.0))), events, ..Default::default() };
