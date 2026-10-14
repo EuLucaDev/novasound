@@ -15,6 +15,7 @@ pub mod edit;
 pub mod file_access;
 pub mod inspect;
 pub mod io;
+pub mod live;
 pub mod score;
 
 use novasound_model::{Clip, Session, TrackId, ZoomState};
@@ -112,6 +113,8 @@ struct HistoryEntry {
 
 /// Engine state: the document, history, clipboard and transport plumbing.
 pub struct Engine {
+    /// Colaboração em tempo real (Nova Live), ver `live`.
+    pub live: live::LiveState,
     doc: Arc<Session>,
     undo: Vec<HistoryEntry>,
     redo: Vec<HistoryEntry>,
@@ -152,6 +155,7 @@ impl Engine {
         install_panic_hook();
         let doc = Arc::new(session);
         Engine {
+            live: live::LiveState::default(),
             saved: Arc::clone(&doc),
             doc,
             undo: Vec::new(),
@@ -195,6 +199,8 @@ impl Engine {
 
     /// Replace the whole document (open / new); clears history.
     pub fn replace_session(&mut self, s: Session) {
+        self.live.on = false;
+        self.live.outbox.clear();
         self.transport = TransportStatus { position: s.edit.selection.start.max(0), ..TransportStatus::default() };
         self.transport_requests.clear();
         self.transport_requests.push(TransportRequest::ResetSession);
@@ -298,6 +304,19 @@ impl Engine {
     /// Run a command by id. Never panics: escaped panics become `EngineError::Internal` and the
     /// document is restored.
     pub fn execute(&mut self, id: &str, params: &Value) -> Result<Value> {
+        self.live.depth += 1;
+        let r = self.execute_inner(id, params);
+        self.live.depth -= 1;
+        if self.live.depth == 0
+            && r.is_ok()
+            && let Some(spec) = find_command(id)
+        {
+            self.live_record(id, params, spec.journal);
+        }
+        r
+    }
+
+    fn execute_inner(&mut self, id: &str, params: &Value) -> Result<Value> {
         let spec = find_command(id).ok_or_else(|| EngineError::UnknownCommand(id.to_string()))?;
         if self.blocked_while_recording(id) {
             return Err(EngineError::Disabled(id.to_string(), "stop recording first".into()));

@@ -13,6 +13,8 @@ pub mod edit_window;
 pub mod extra_windows;
 pub mod fonts;
 pub mod icons;
+#[cfg(not(target_arch = "wasm32"))]
+pub mod live_ui;
 pub mod menus;
 pub mod midi_editor;
 pub mod mix_window;
@@ -245,6 +247,8 @@ pub enum Gesture {
 }
 
 pub struct SoundApp {
+    #[cfg(not(target_arch = "wasm32"))]
+    pub live: live_ui::LiveUi,
     pub engine: Engine,
     /// The session path as of the last frame, and whether the recent list changed since the host
     /// last saved it (see `recent`).
@@ -348,6 +352,8 @@ impl SoundApp {
             recent_seen: engine.path.clone(),
             recent_changed: false,
             recent_checked: None,
+            #[cfg(not(target_arch = "wasm32"))]
+            live: live_ui::LiveUi::default(),
             engine,
             player,
             recorder: None,
@@ -1205,6 +1211,12 @@ impl SoundApp {
     /// Lay out the whole window.
     pub fn ui(&mut self, ui: &mut egui::Ui) {
         let ctx = ui.ctx().clone();
+        #[cfg(not(target_arch = "wasm32"))]
+        {
+            live_ui::pump(self, &ctx);
+            live_ui::bar(self, ui);
+            live_ui::window(self, &ctx);
+        }
         // The integration creates this Ui before logic resolves the current frame's palette.
         ui.set_style(ctx.global_style());
         if !self.fonts_ready {

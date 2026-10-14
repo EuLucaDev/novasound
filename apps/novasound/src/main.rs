@@ -207,7 +207,7 @@ fn main() -> eframe::Result {
     // First, so every start-up record (and the engine's panic hook, installed with the first
     // Engine) is captured; see `logging`.
     let logger = logging::install();
-    let args: Vec<String> = std::env::args().skip(1).collect();
+    let args: Vec<String> = std::env::args().skip(1).filter(|arg| !novasound_ui_egui::live_ui::is_invite_arg(arg)).collect();
     if args.iter().any(|a| a == "--version" || a == "-V") {
         println!("Nova Sound {}", env!("CARGO_PKG_VERSION"));
         return Ok(());
@@ -270,6 +270,7 @@ fn main() -> eframe::Result {
             let player =
                 if no_audio { None } else { Some(novasound_playback::Player::with_config(Arc::new(engine.session().clone()), &prefs.audio)) };
             let mut app = SoundApp::new(engine, player, services());
+            app.live.pending_join = novasound_ui_egui::live_ui::launch_invite();
             app.autosave_dir = prefs_path().and_then(|p| p.parent().map(|d| d.join("Autosave")));
             app.leftovers = app.autosave_dir.as_deref().map(novasound_engine::autosave::leftovers).unwrap_or_default();
             app.preset_dir = prefs_path().and_then(|p| p.parent().map(|d| d.join("Presets")));
