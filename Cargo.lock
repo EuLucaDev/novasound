@@ -2353,15 +2353,26 @@ dependencies = [
 [[package]]
 name = "nova-live"
 version = "0.1.0"
-source = "git+https://github.com/EuLucaDev/nova-live?rev=73c86a72931074d3a0b55997ac0d9dc64237cfa1#73c86a72931074d3a0b55997ac0d9dc64237cfa1"
+source = "git+https://github.com/EuLucaDev/nova-live?rev=4bae300bfa60a31ef62f1d9f28a4cd067b46ed7c#4bae300bfa60a31ef62f1d9f28a4cd067b46ed7c"
 dependencies = [
  "base64",
  "getrandom 0.4.3",
+ "nova-live-macos",
  "rustls",
  "serde",
  "serde_json",
  "tungstenite",
  "webpki-roots",
+ "windows-registry",
+]
+
+[[package]]
+name = "nova-live-macos"
+version = "0.1.0"
+source = "git+https://github.com/EuLucaDev/nova-live?rev=4bae300bfa60a31ef62f1d9f28a4cd067b46ed7c#4bae300bfa60a31ef62f1d9f28a4cd067b46ed7c"
+dependencies = [
+ "objc2 0.6.5",
+ "objc2-foundation 0.3.2",
 ]
 
 [[package]]
@@ -2374,7 +2385,7 @@ dependencies = [
 
 [[package]]
 name = "novasound"
-version = "0.7.0"
+version = "0.8.0"
 dependencies = [
  "eframe",
  "egui",
@@ -2392,7 +2403,7 @@ dependencies = [
 
 [[package]]
 name = "novasound-au-host"
-version = "0.7.0"
+version = "0.8.0"
 dependencies = [
  "log",
  "novasound-dsp",
@@ -2402,7 +2413,7 @@ dependencies = [
 
 [[package]]
 name = "novasound-audio-io"
-version = "0.7.0"
+version = "0.8.0"
 dependencies = [
  "log",
  "proptest",
@@ -2414,7 +2425,7 @@ dependencies = [
 
 [[package]]
 name = "novasound-automation"
-version = "0.7.0"
+version = "0.8.0"
 dependencies = [
  "log",
  "novasound-engine",
@@ -2424,7 +2435,7 @@ dependencies = [
 
 [[package]]
 name = "novasound-clap-host"
-version = "0.7.0"
+version = "0.8.0"
 dependencies = [
  "clap-sys",
  "libloading",
@@ -2437,7 +2448,7 @@ dependencies = [
 
 [[package]]
 name = "novasound-cli"
-version = "0.7.0"
+version = "0.8.0"
 dependencies = [
  "novasound-audio-io",
  "novasound-automation",
@@ -2448,7 +2459,7 @@ dependencies = [
 
 [[package]]
 name = "novasound-dsp"
-version = "0.7.0"
+version = "0.8.0"
 dependencies = [
  "log",
  "proptest",
@@ -2459,7 +2470,7 @@ dependencies = [
 
 [[package]]
 name = "novasound-engine"
-version = "0.7.0"
+version = "0.8.0"
 dependencies = [
  "log",
  "novasound-au-host",
@@ -2481,7 +2492,7 @@ dependencies = [
 
 [[package]]
 name = "novasound-midi"
-version = "0.7.0"
+version = "0.8.0"
 dependencies = [
  "proptest",
  "serde",
@@ -2491,7 +2502,7 @@ dependencies = [
 
 [[package]]
 name = "novasound-mix"
-version = "0.7.0"
+version = "0.8.0"
 dependencies = [
  "log",
  "novasound-au-host",
@@ -2507,7 +2518,7 @@ dependencies = [
 
 [[package]]
 name = "novasound-model"
-version = "0.7.0"
+version = "0.8.0"
 dependencies = [
  "novasound-audio-io",
  "novasound-midi",
@@ -2520,7 +2531,7 @@ dependencies = [
 
 [[package]]
 name = "novasound-playback"
-version = "0.7.0"
+version = "0.8.0"
 dependencies = [
  "cpal",
  "log",
@@ -2535,7 +2546,7 @@ dependencies = [
 
 [[package]]
 name = "novasound-time"
-version = "0.7.0"
+version = "0.8.0"
 dependencies = [
  "proptest",
  "serde",
@@ -2545,7 +2556,7 @@ dependencies = [
 
 [[package]]
 name = "novasound-ui-egui"
-version = "0.7.0"
+version = "0.8.0"
 dependencies = [
  "egui",
  "egui_kittest",
@@ -2572,7 +2583,7 @@ dependencies = [
 
 [[package]]
 name = "novasound-video"
-version = "0.7.0"
+version = "0.8.0"
 dependencies = [
  "image",
  "proptest",
@@ -2583,7 +2594,7 @@ dependencies = [
 
 [[package]]
 name = "novasound-vst3-host"
-version = "0.7.0"
+version = "0.8.0"
 dependencies = [
  "libloading",
  "log",
@@ -2599,7 +2610,7 @@ dependencies = [
 
 [[package]]
 name = "novasound-web"
-version = "0.7.0"
+version = "0.8.0"
 dependencies = [
  "eframe",
  "egui",
@@ -5179,6 +5190,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "windows-registry"
+version = "0.6.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "02752bf7fbdcce7f2a27a742f798510f3e5ad88dbe84871e5168e2120c3d5720"
+dependencies = [
+ "windows-link",
+ "windows-result 0.4.1",
+ "windows-strings",
+]
+
+[[package]]
 name = "windows-result"
 version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -5592,7 +5614,7 @@ checksum = "e450f9b2ed1dff33c94c12589a87338689467b9c4f5d8a5710bd09a847d2c8a7"
 
 [[package]]
 name = "xtask"
-version = "0.7.0"
+version = "0.8.0"
 dependencies = [
  "serde_json",
 ]

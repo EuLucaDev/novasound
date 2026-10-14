@@ -116,5 +116,16 @@
       <array><string>public.midi-audio</string></array>
     </dict>
   </array>
+  <key>CFBundleURLTypes</key>
+  <array>
+    <dict>
+      <key>CFBundleURLName</key>
+      <string>br.com.novafoods.novasound.invite</string>
+      <key>CFBundleTypeRole</key>
+      <string>Editor</string>
+      <key>CFBundleURLSchemes</key>
+      <array><string>novasound</string></array>
+    </dict>
+  </array>
 </dict>
 </plist>

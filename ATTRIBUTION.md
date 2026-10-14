@@ -38,7 +38,7 @@ and, at runtime, the operating system's own UI fonts when available (never redis
 | `docs/brand/novafoods-mark-black.svg` | Nova Foods Team | craftrules `assets/brand/` | Nova Foods brand terms |
 | `docs/brand/novafoods-mark-black.png` | Nova Foods Team | craftrules `assets/brand/` | Nova Foods brand terms |
 | `assets/app-icon/icon.svg` | Nova Sound contributors | original (hand-placed SVG paths; placeholder app icon) | MIT OR Apache-2.0 |
-| `packaging/macos/dmg/` (all files) | @XusBadia | original (macOS DMG window background and layout, from the app icon; see `packaging/macos/dmg/README.md`) | MIT OR Apache-2.0 |
+| `packaging/macos/dmg/` (all files) | Nova Foods | original (macOS DMG window background and layout, with the Nova Foods logo (trademark, `docs/brand/LICENSE-brand.txt`); see `packaging/macos/dmg/README.md`) | MIT OR Apache-2.0 |
 | `assets/app-icon/novasound-1024.png` | Nova Sound contributors | original, rendered from `icon.svg` | MIT OR Apache-2.0 |
 | `assets/app-icon/novasound-macos-512.png` | Nova Sound contributors | original, rendered from `icon.svg` | MIT OR Apache-2.0 |
 | `assets/app-icon/novasound.icns` | Nova Sound contributors | original, rendered from `icon.svg` | MIT OR Apache-2.0 |

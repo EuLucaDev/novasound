@@ -9,6 +9,7 @@
 use std::sync::Arc;
 
 use novasound_model::Session as Doc;
+use novasound_model::SourceAudio;
 use serde_json::Value;
 
 use crate::{Engine, EngineError, Result};
@@ -26,6 +27,9 @@ pub struct LiveState {
     pub(crate) applying: bool,
     pub(crate) seen: Option<Arc<Doc>>,
     pub(crate) depth: u32,
+    /// Áudios recebidos de colegas, pelo caminho que a sessão usa (o áudio decodificado não faz
+    /// parte do documento: volta ao pool depois de carregar um documento novo ou de desfazer).
+    pub(crate) received: std::collections::HashMap<String, Arc<SourceAudio>>,
 }
 
 fn err(e: impl std::fmt::Display) -> EngineError {
@@ -49,12 +53,80 @@ fn remote_command_allowed(cmd: &str) -> bool {
 
 impl Engine {
     pub fn live_start(&mut self) -> Result<()> {
-        self.live = LiveState { on: true, seen: Some(self.doc.clone()), ..LiveState::default() };
+        let received = std::mem::take(&mut self.live.received);
+        self.live = LiveState { on: true, seen: Some(self.doc.clone()), received, ..LiveState::default() };
         Ok(())
     }
 
     pub fn live_stop(&mut self) {
-        self.live = LiveState::default();
+        let received = std::mem::take(&mut self.live.received);
+        self.live = LiveState { received, ..LiveState::default() };
+    }
+
+    /// Arquivos de áudio que a sessão usa, pelo caminho guardado nela.
+    pub fn live_media(&self) -> Vec<String> {
+        let mut out: Vec<String> = Vec::new();
+        for src in &self.doc.sources {
+            if !src.path.is_empty() && !out.contains(&src.path) {
+                out.push(src.path.clone());
+            }
+        }
+        out
+    }
+
+    /// O áudio desta chave está carregado aqui?
+    pub fn live_media_available(&mut self, path: &str) -> bool {
+        self.restore_received();
+        let mut any = false;
+        for src in self.doc.sources.iter().filter(|s| s.path == path) {
+            any = true;
+            if !self.doc.pool.contains(src.id) {
+                return false;
+            }
+        }
+        any
+    }
+
+    /// O áudio desta chave em WAV (32 bits flutuante), para enviar a um colega.
+    pub fn live_media_wav(&self, path: &str) -> Option<Vec<u8>> {
+        let audio = self.doc.sources.iter().filter(|s| s.path == path).find_map(|s| self.doc.pool.get(s.id))?;
+        let opts = novasound_audio_io::EncodeOptions { bit_depth: novasound_audio_io::BitDepth::Float32, ..Default::default() };
+        novasound_audio_io::encode(&audio.buffer, &opts).ok()
+    }
+
+    /// O áudio chegou (WAV em `local`): entra no pool das fontes com esse caminho.
+    pub fn live_media_ready(&mut self, path: &str, local: &std::path::Path) -> Result<()> {
+        let bytes = std::fs::read(local).map_err(err)?;
+        let audio = crate::io::decode_source(&bytes, Some("wav"), self.doc.sample_rate.hz()).map_err(err)?;
+        self.live.received.insert(path.to_string(), audio);
+        self.restore_received();
+        Ok(())
+    }
+
+    /// Põe de volta no pool os áudios recebidos que o documento atual usa e não tem carregados.
+    fn restore_received(&mut self) {
+        if self.live.received.is_empty() {
+            return;
+        }
+        let missing: Vec<_> = self
+            .doc
+            .sources
+            .iter()
+            .filter(|s| !self.doc.pool.contains(s.id))
+            .filter_map(|s| self.live.received.get(&s.path).map(|a| (s.id, a.clone())))
+            .collect();
+        if missing.is_empty() {
+            return;
+        }
+        let tracked = self.live.seen.as_ref().is_some_and(|s| Arc::ptr_eq(s, &self.doc));
+        let d = Arc::make_mut(&mut self.doc);
+        for (id, audio) in missing {
+            d.pool.insert(id, audio);
+        }
+        // Só o áudio (fora do documento) mudou: não é uma alteração para enviar.
+        if tracked {
+            self.live.seen = Some(self.doc.clone());
+        }
     }
 
     pub fn live_active(&self) -> bool {
@@ -82,10 +154,18 @@ impl Engine {
     }
 
     pub fn live_load(&mut self, bytes: &[u8]) -> Result<()> {
-        let d: Doc = serde_json::from_slice(bytes).map_err(err)?;
+        let mut d: Doc = serde_json::from_slice(bytes).map_err(err)?;
+        // O áudio decodificado não viaja no documento: fica o que já estava carregado aqui.
+        d.pool = self.doc.pool.clone();
+        d.folder = self.doc.folder.clone();
         self.doc = Arc::new(d);
         self.revision = self.revision.wrapping_add(1);
         self.live.seen = Some(self.doc.clone());
+        self.restore_received();
+        // O desfazer guarda fotos da sessão: depois de uma alteração de colega, desfazer o passo
+        // anterior apagaria o trabalho dele. O histórico local recomeça daqui.
+        self.undo.clear();
+        self.redo.clear();
         Ok(())
     }
 
@@ -94,12 +174,12 @@ impl Engine {
         if !remote_command_allowed(cmd) {
             return Err(err("comando não permitido na colaboração"));
         }
-        let (undo, redo) = (self.undo.len(), self.redo.clone());
         self.live.applying = true;
         let r = self.execute(cmd, params);
         self.live.applying = false;
-        self.undo.truncate(undo);
-        self.redo = redo;
+        // Desfazer não pode apagar o passo do colega: o histórico local recomeça daqui.
+        self.undo.clear();
+        self.redo.clear();
         self.live.seen = Some(self.doc.clone());
         r.map(|_| ())
     }

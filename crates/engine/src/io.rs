@@ -1119,7 +1119,7 @@ pub fn open_session(e: &mut Engine, path: &str) -> Result<Vec<String>> {
 }
 
 /// Decode one source's audio file at the session rate.
-fn decode_source(bytes: &[u8], ext: Option<&str>, rate: u32) -> std::result::Result<Arc<SourceAudio>, String> {
+pub(crate) fn decode_source(bytes: &[u8], ext: Option<&str>, rate: u32) -> std::result::Result<Arc<SourceAudio>, String> {
     let (_, buf) = novasound_audio_io::decode(bytes, ext).map_err(|err| err.to_string())?;
     let buf = at_rate(buf, rate, MAX_IMPORT_SAMPLES).ok_or("too large to load")?;
     Ok(Arc::new(SourceAudio::new(buf)))

@@ -90,6 +90,13 @@ fn mods(p: &Value) -> egui::Modifiers {
 }
 
 fn handle(app: &mut SoundApp, ctx: &egui::Context, req: &ControlRequest) -> Option<Value> {
+    #[cfg(not(target_arch = "wasm32"))]
+    if let Some(r) = crate::live_ui::control(app, req.method.as_str(), &req.params) {
+        return Some(match r {
+            Ok(v) => ok(v),
+            Err(e) => err(e),
+        });
+    }
     let p = &req.params;
     let f = |k: &str| p.get(k).and_then(Value::as_f64).unwrap_or(0.0) as f32;
     let pos = egui::pos2(f("x"), f("y"));
