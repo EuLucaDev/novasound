@@ -250,6 +250,32 @@ fn main_area_content(app: &mut SoundApp, ui: &mut Ui) {
         content_h += h + 1.0;
     }
     app.edit_layout.content_h = content_h;
+    // Colaboração: o mouse vai como amostra (tempo) e faixa (+ posição dentro dela).
+    #[cfg(not(target_arch = "wasm32"))]
+    {
+        let rows = app.edit_layout.rows.clone();
+        let rows2 = rows.clone();
+        let zoom = &app.engine.session().edit.zoom;
+        let (scroll, spp) = (zoom.scroll as f64, zoom.samples_per_px.max(0.01));
+        app.live.view = Some(crate::live_ui::LiveView::new(
+            tl,
+            "faixas",
+            move |p| {
+                let at = scroll + f64::from(p.x - tl.min.x) * spp;
+                match rows.iter().find(|(_, r)| p.y >= r[1] && p.y < r[3]) {
+                    Some((id, r)) => (at, *id as f64 + f64::from(((p.y - r[1]) / (r[3] - r[1]).max(1.0)).clamp(0.0, 0.999))),
+                    None => (at, -1.0),
+                }
+            },
+            move |x, y| {
+                let px = tl.min.x + ((x - scroll) / spp) as f32;
+                match rows2.iter().find(|(id, _)| (*id as f64 - y.floor()).abs() < 0.5) {
+                    Some((_, r)) => pos2(px, r[1] + (r[3] - r[1]) * y.fract() as f32),
+                    None => pos2(px, f32::NAN),
+                }
+            },
+        ));
+    }
     let clip_rect = Rect::from_min_max(pos2(full.min.x, tl.min.y), pos2(full.max.x, tl.max.y));
     for (id, r) in app.edit_layout.rows.clone() {
         let row = rect(r);
