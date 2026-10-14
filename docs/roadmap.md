@@ -1,5 +1,6 @@
 # Nova Sound roadmap: milestones and what's next
 
+> **Last reviewed:** 2026-10-14 · **Last updated:** 2026-10-14 · **Change:** minor (integração Nova Foods 0.7.0; títulos do mixer; estimativas inalteradas)
 > **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-10 · **Change:** minor (alpha gate added; stage re-normalized to pre-alpha) · **Target:** Avid Pro Tools Ultimate 2026.4.1
 
 Forward-looking plan. Status and numbers: [`../ROADMAP.md`](../ROADMAP.md) and
@@ -39,7 +40,7 @@ Status: ✅ done · 🟡 in progress · ⬜ not started.
 
 | # | Milestone | Status | Remaining (h) |
 |---|---|---|---:|
-| M0–M4 | Workspace, gates, model, I/O, DSP, mix engine, command engine, Edit/Mix UI, playback, metering, plugins, bounce | ✅ | — |
+| M0–M4 | Workspace, gates, model, I/O, DSP, mix engine, command engine, Edit/Mix UI, playback, metering, plugins, bounce; 2026-10-14: títulos abreviados consistentes nas faixas estreitas | ✅ | — |
 | M5 | Editing depth (tools, modes, playlists, fades, comping, clip groups) | ✅ (bugs open, G-04) | in G-04 |
 | M6 | Recording, punch, loop record, monitoring | 🟡 first cut; device choice and record-to-disk missing | 40–60 |
 | M7 | MIDI and notation editing | 🟡 | 50–80 |
