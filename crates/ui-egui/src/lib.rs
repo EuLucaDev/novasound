@@ -1132,8 +1132,12 @@ impl SoundApp {
             }
         }
         let light = theme::wants_light(ctx, self.ui.theme);
-        if self.theme_applied != Some(light) || theme::is_light() != light {
-            theme::apply(ctx, light);
+        let suite = match self.ui.theme {
+            theme::ThemeMode::Suite(kind) => Some(kind),
+            _ => None,
+        };
+        if self.theme_applied != Some(light) || theme::is_light() != light || theme::suite() != suite {
+            theme::apply_mode(ctx, light, suite);
             self.theme_applied = Some(light);
         }
         let now = ctx.input(|i| i.time);

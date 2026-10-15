@@ -1,10 +1,25 @@
 //! Design tokens. Colours were chosen by eye to give a dark, studio-style look; they are ours.
 
 use egui::{Color32, FontFamily, FontId};
-use std::sync::atomic::{AtomicBool, Ordering};
+use std::sync::atomic::{AtomicBool, AtomicU8, Ordering};
 
 /// Whether the Light palette is active. Dark is the default (the incumbent is dark-only).
 static LIGHT_THEME: AtomicBool = AtomicBool::new(false);
+
+/// The active Nova Foods suite theme: 0 for none, else its index in `nova_themes::ThemeKind::ALL`
+/// plus one.
+static SUITE_THEME: AtomicU8 = AtomicU8::new(0);
+
+/// The suite theme the palette uses, if any.
+pub fn suite() -> Option<nova_themes::ThemeKind> {
+    let i = SUITE_THEME.load(Ordering::Relaxed);
+    i.checked_sub(1).and_then(|i| nova_themes::ThemeKind::ALL.get(usize::from(i)).copied())
+}
+
+fn set_suite(kind: Option<nova_themes::ThemeKind>) {
+    let i = kind.and_then(|k| nova_themes::ThemeKind::ALL.iter().position(|x| *x == k)).map_or(0, |i| i as u8 + 1);
+    SUITE_THEME.store(i, Ordering::Relaxed);
+}
 
 /// Unit tests that change or read the process-wide palette must own it until their assertions
 /// finish. The lock is re-entrant per thread, so a test may hold it and still build apps
@@ -74,16 +89,24 @@ pub enum ThemeMode {
     Light,
     #[default]
     Dark,
+    /// One of the Nova Foods suite themes (Nova Photo's fourteen, from `nova-themes`).
+    Suite(nova_themes::ThemeKind),
 }
 
 impl ThemeMode {
     pub const ALL: [Self; 3] = [Self::Dark, Self::Light, Self::System];
+
+    /// Every choice Settings › Theme offers: the three above, then the suite themes.
+    pub fn menu() -> Vec<Self> {
+        Self::ALL.into_iter().chain(nova_themes::ThemeKind::ALL.into_iter().map(Self::Suite)).collect()
+    }
 
     pub const fn label(self) -> &'static str {
         match self {
             Self::System => "System",
             Self::Light => "Light",
             Self::Dark => "Dark",
+            Self::Suite(kind) => kind.label(),
         }
     }
 
@@ -93,11 +116,12 @@ impl ThemeMode {
             Self::System => "system",
             Self::Light => "light",
             Self::Dark => "dark",
+            Self::Suite(kind) => kind.id(),
         }
     }
 
     pub fn parse(s: &str) -> Option<Self> {
-        Self::ALL.into_iter().find(|m| m.id().eq_ignore_ascii_case(s.trim()))
+        Self::ALL.into_iter().find(|m| m.id().eq_ignore_ascii_case(s.trim())).or_else(|| nova_themes::ThemeKind::from_name(s.trim()).map(Self::Suite))
     }
 }
 
@@ -384,7 +408,42 @@ impl Tokens {
     };
 
     pub fn current() -> Tokens {
+        if let Some(kind) = suite() {
+            return Self::for_suite(kind);
+        }
         if is_light() { Self::LIGHT } else { Self::DARK }
+    }
+
+    /// A suite theme paints the chrome (window, panels, toolbars, menus, buttons, fields, text,
+    /// accent); meters, counters, clips, rulers' marks and the transport colours stay Nova Sound's.
+    pub fn for_suite(kind: nova_themes::ThemeKind) -> Tokens {
+        let p = kind.palette();
+        let base = if kind.is_dark() { Self::DARK } else { Self::LIGHT };
+        let c = |x: nova_themes::Rgba| Color32::from_rgba_unmultiplied(x[0], x[1], x[2], x[3]);
+        Tokens {
+            window_bg: c(p.chrome),
+            panel_bg: c(p.card),
+            panel_bg2: c(nova_themes::mix(p.card, p.text, 0.06)),
+            toolbar_bg: c(p.chrome),
+            toolbar_group: c(p.dock),
+            border: c(p.card_border),
+            border_light: c(p.field_border),
+            text: c(p.text),
+            text_dim: c(p.text_dim),
+            header_text: c(p.text_dim),
+            accent: c(p.accent),
+            accent_dark: c(nova_themes::mix(p.accent, [0, 0, 0, 255], 0.3)),
+            button: c(p.field),
+            button_hi: c(p.hover),
+            button_border: c(p.field_border),
+            menu_bar: c(p.chrome),
+            group_border: c(p.card_border),
+            row_selected: c(p.row_selected),
+            strip_bg: c(p.card),
+            strip_section: c(p.dock),
+            section_label: c(p.text_faint),
+            ..base
+        }
     }
 }
 
@@ -396,6 +455,7 @@ pub fn is_light() -> bool {
 /// Resolve each frame from the integration's current OS appearance. Unknown uses Dark.
 pub fn wants_light(ctx: &egui::Context, mode: ThemeMode) -> bool {
     match mode {
+        ThemeMode::Suite(kind) => !kind.is_dark(),
         ThemeMode::Light => true,
         ThemeMode::Dark => false,
         ThemeMode::System => ctx.system_theme() == Some(egui::Theme::Light),
@@ -451,6 +511,12 @@ pub fn mono(size: f32) -> FontId {
 
 /// Make `light` (or dark) the active palette and apply its visuals. Call only when it changes.
 pub fn apply(ctx: &egui::Context, light: bool) {
+    apply_mode(ctx, light, None);
+}
+
+/// [`apply`], with the suite theme to paint (`None` for Nova Sound's own Light/Dark).
+pub fn apply_mode(ctx: &egui::Context, light: bool, suite: Option<nova_themes::ThemeKind>) {
+    set_suite(suite);
     LIGHT_THEME.store(light, Ordering::Relaxed);
     let t = Tokens::current();
     let mut v = if light { egui::Visuals::light() } else { egui::Visuals::dark() };
