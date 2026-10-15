@@ -2385,7 +2385,7 @@ dependencies = [
 
 [[package]]
 name = "novasound"
-version = "0.9.0"
+version = "0.10.0"
 dependencies = [
  "eframe",
  "egui",
@@ -2403,7 +2403,7 @@ dependencies = [
 
 [[package]]
 name = "novasound-au-host"
-version = "0.9.0"
+version = "0.10.0"
 dependencies = [
  "log",
  "novasound-dsp",
@@ -2413,7 +2413,7 @@ dependencies = [
 
 [[package]]
 name = "novasound-audio-io"
-version = "0.9.0"
+version = "0.10.0"
 dependencies = [
  "log",
  "proptest",
@@ -2425,7 +2425,7 @@ dependencies = [
 
 [[package]]
 name = "novasound-automation"
-version = "0.9.0"
+version = "0.10.0"
 dependencies = [
  "log",
  "novasound-engine",
@@ -2435,7 +2435,7 @@ dependencies = [
 
 [[package]]
 name = "novasound-clap-host"
-version = "0.9.0"
+version = "0.10.0"
 dependencies = [
  "clap-sys",
  "libloading",
@@ -2448,7 +2448,7 @@ dependencies = [
 
 [[package]]
 name = "novasound-cli"
-version = "0.9.0"
+version = "0.10.0"
 dependencies = [
  "novasound-audio-io",
  "novasound-automation",
@@ -2459,7 +2459,7 @@ dependencies = [
 
 [[package]]
 name = "novasound-dsp"
-version = "0.9.0"
+version = "0.10.0"
 dependencies = [
  "log",
  "proptest",
@@ -2470,7 +2470,7 @@ dependencies = [
 
 [[package]]
 name = "novasound-engine"
-version = "0.9.0"
+version = "0.10.0"
 dependencies = [
  "log",
  "novasound-au-host",
@@ -2492,7 +2492,7 @@ dependencies = [
 
 [[package]]
 name = "novasound-midi"
-version = "0.9.0"
+version = "0.10.0"
 dependencies = [
  "proptest",
  "serde",
@@ -2502,7 +2502,7 @@ dependencies = [
 
 [[package]]
 name = "novasound-mix"
-version = "0.9.0"
+version = "0.10.0"
 dependencies = [
  "log",
  "novasound-au-host",
@@ -2518,7 +2518,7 @@ dependencies = [
 
 [[package]]
 name = "novasound-model"
-version = "0.9.0"
+version = "0.10.0"
 dependencies = [
  "novasound-audio-io",
  "novasound-midi",
@@ -2531,7 +2531,7 @@ dependencies = [
 
 [[package]]
 name = "novasound-playback"
-version = "0.9.0"
+version = "0.10.0"
 dependencies = [
  "cpal",
  "log",
@@ -2546,7 +2546,7 @@ dependencies = [
 
 [[package]]
 name = "novasound-time"
-version = "0.9.0"
+version = "0.10.0"
 dependencies = [
  "proptest",
  "serde",
@@ -2556,7 +2556,7 @@ dependencies = [
 
 [[package]]
 name = "novasound-ui-egui"
-version = "0.9.0"
+version = "0.10.0"
 dependencies = [
  "egui",
  "egui_kittest",
@@ -2583,7 +2583,7 @@ dependencies = [
 
 [[package]]
 name = "novasound-video"
-version = "0.9.0"
+version = "0.10.0"
 dependencies = [
  "image",
  "proptest",
@@ -2594,7 +2594,7 @@ dependencies = [
 
 [[package]]
 name = "novasound-vst3-host"
-version = "0.9.0"
+version = "0.10.0"
 dependencies = [
  "libloading",
  "log",
@@ -2610,7 +2610,7 @@ dependencies = [
 
 [[package]]
 name = "novasound-web"
-version = "0.9.0"
+version = "0.10.0"
 dependencies = [
  "eframe",
  "egui",
@@ -5614,7 +5614,7 @@ checksum = "e450f9b2ed1dff33c94c12589a87338689467b9c4f5d8a5710bd09a847d2c8a7"
 
 [[package]]
 name = "xtask"
-version = "0.9.0"
+version = "0.10.0"
 dependencies = [
  "serde_json",
 ]
