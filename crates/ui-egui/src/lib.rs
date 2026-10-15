@@ -4,6 +4,9 @@
 //! executing commands. It can be replaced without touching anything below it.
 #![deny(clippy::unwrap_used, clippy::expect_used, clippy::panic, clippy::unimplemented, clippy::todo, clippy::unreachable)]
 
+#[cfg(not(target_arch = "wasm32"))]
+pub use nova_account_ui as account_ui;
+
 pub mod bounce;
 pub mod control;
 pub mod credits;

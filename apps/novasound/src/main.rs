@@ -90,6 +90,10 @@ impl eframe::App for App {
         self.0.raw_input_hook(raw);
     }
     fn ui(&mut self, ui: &mut egui::Ui, _frame: &mut eframe::Frame) {
+        #[cfg(not(target_arch = "wasm32"))]
+        if !novasound_ui_egui::account_ui::gate(ui, "novasound") {
+            return;
+        }
         self.0.guarded(|app| app.ui(ui));
     }
     fn on_exit(&mut self) {
